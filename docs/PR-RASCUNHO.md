@@ -19,3 +19,7 @@ Validar identidade visual, domínio e atualidade dos cadastros antes de publica�
 A captura visual pelo Chromium não concluiu dentro de 25 segundos; revisão em navegador de desktop e celular ainda pendente. O smoke test HTTP passou, mas não substitui essa revisão visual.
 
 A branch foi enviada. A criação automática do PR em rascunho retornou `Forbidden` em `https://api.github.com/graphql`. Este documento preserva a descrição para retomar a abertura quando a API estiver acessível.
+
+## Prévia temporária
+
+O workflow `Publish GitHub Pages preview` publica a branch `feat/supreme-site-inicial` no GitHub Pages. O endereço esperado é `https://adenorjunior-cloud.github.io/supreme-colchoes-site/`, condicionado à ativação do GitHub Pages pelo repositório e à execução bem-sucedida do workflow. A prévia usa `noindex` e `robots.txt` bloqueado; não é uma publicação de produção.

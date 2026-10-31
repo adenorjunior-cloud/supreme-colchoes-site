@@ -29,4 +29,8 @@ Para validar canonicals/indexação em ambiente local, execute build/start com `
 
 CI executa lint, testes unitários, build, TypeScript e smoke test HTTP, sem publicar.
 
+## Prévia no GitHub Pages
+
+O workflow `Publish GitHub Pages preview` publica somente a branch `feat/supreme-site-inicial` em uma prévia temporária. Ele usa exportação estática e não recebe `SITE_URL`, portanto a prévia permanece com `noindex` e não é uma publicação de produção.
+
 Veja [referências e pendências de revisão](docs/REFERENCIAS.md). Identidade visual provisória até recebimento dos materiais aprovados. Dados das lojas têm origem documentada; catálogo e preços não foram presumidos.

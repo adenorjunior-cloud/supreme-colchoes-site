@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { getSiteUrl, whatsappLink } from '../lib/site.ts';
 import { serializeJsonLd } from '../lib/json-ld.ts';
 import { stores } from '../lib/stores.ts';
+import { products } from '../lib/products.ts';
+import { sizes } from '../lib/sizes.ts';
 test('WhatsApp uses each confirmed store contact and encodes messages', () => {
   assert.equal(stores.length, 2);
   assert.match(whatsappLink(stores[0].whatsapp, 'Olá & projeto'), /^https:\/\/wa.me\/5571981354567\?text=Ol%C3%A1%20%26%20projeto$/);
@@ -20,4 +22,10 @@ test('JSON-LD preserves data without allowing script injection', () => {
   assert.equal(encoded.includes('<'), false);
   assert.equal(encoded.includes('&'), false);
   assert.deepEqual(JSON.parse(encoded), value);
+});
+test('offers have a price and reference sizes are complete', () => {
+  const offers = products.filter((product) => product.offer);
+  assert.ok(offers.length > 0);
+  for (const product of offers) assert.ok(product.price && product.price > 0, product.slug);
+  assert.deepEqual(sizes.map((size) => size.name), ['Solteiro', 'Solteirão', 'Casal', 'Queen', 'King']);
 });

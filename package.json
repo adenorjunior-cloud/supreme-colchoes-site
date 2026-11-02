@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:hostgator": "node scripts/build-static.mjs",
+    "build:hostgator-preview": "node scripts/build-static.mjs --preview",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit --incremental false",

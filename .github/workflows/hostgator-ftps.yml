@@ -46,13 +46,14 @@ jobs:
           test -f out/index.html
           test -f out/colchoes/index.html
           test -f out/robots.txt
+          ! grep -q '/_next/image/' out/index.html
 
       - name: Normalize FTP server
         id: ftp-server
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
         run: |
-          node -e 'const fs=require("node:fs"); const raw=(process.env.FTP_SERVER||"").replaceAll("\\n","").replaceAll("\\r","").trim(); const host=/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? new URL(raw).hostname : raw.replace(/\/.*$/, "").replace(/:.+$/, ""); if (!host) throw new Error("FTP_SERVER is empty"); fs.appendFileSync(process.env.GITHUB_OUTPUT, "server="+host+"\n");'
+          node -e 'const fs=require("node:fs"); const raw=(process.env.FTP_SERVER||"").replaceAll("\\n","").replaceAll("\\r","").trim(); const host=/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? new URL(raw).hostname : raw.replace(/\/.*$/, "").replace(/:.+$/, ""); if (!host) throw new Error("FTP_SERVER is empty"); fs.appendFileSync(process.env.GITHUB_OUTPUT, "server="+host+"\\n");'
 
       - name: Upload static site through explicit FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
@@ -65,3 +66,54 @@ jobs:
           security: strict
           local-dir: ./out/
           server-dir: ./
+
+  publish-preview:
+    name: Build and publish isolated temporary preview
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static preview
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: npm run build:hostgator-preview
+
+      - name: Verify preview output
+        run: |
+          test -f out/index.html
+          test -f out/colchoes/index.html
+          test -f out/colchoes/supreme-ouro.webp
+          grep -q 'href="/~adenor90/preview/_next/static/css/' out/index.html
+          grep -q 'src="/~adenor90/preview/colchoes/' out/index.html
+          ! grep -q '/_next/image/' out/index.html
+
+      - name: Normalize FTP server
+        id: ftp-server
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          node -e 'const fs=require("node:fs"); const raw=(process.env.FTP_SERVER||"").replaceAll("\\n","").replaceAll("\\r","").trim(); const host=/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? new URL(raw).hostname : raw.replace(/\/.*$/, "").replace(/:.+$/, ""); if (!host) throw new Error("FTP_SERVER is empty"); fs.appendFileSync(process.env.GITHUB_OUTPUT, "server="+host+"\\n");'
+
+      - name: Upload isolated preview through explicit FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ steps.ftp-server.outputs.server }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          security: strict
+          local-dir: ./out/
+          server-dir: ./preview/

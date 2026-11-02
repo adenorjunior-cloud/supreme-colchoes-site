@@ -1,0 +1,60 @@
+name: Build and publish to HostGator
+
+on:
+  push:
+    branches: [feat/supreme-site-inicial]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostgator-production
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Build static site and upload via FTPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate source
+        run: |
+          npm run lint
+          npm test
+          npm run typecheck
+
+      - name: Build static files for HostGator
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: npm run build:hostgator
+
+      - name: Verify static output
+        run: |
+          test -f out/index.html
+          test -f out/colchoes/index.html
+          test -f out/robots.txt
+
+      - name: Upload static site through explicit FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          security: strict
+          local-dir: ./out/
+          server-dir: ./

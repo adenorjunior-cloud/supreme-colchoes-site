@@ -52,7 +52,7 @@ jobs:
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
         run: |
-          node -e 'const fs=require("node:fs"); const raw=(process.env.FTP_SERVER||"").trim(); const host=/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? new URL(raw).hostname : raw.replace(/\/.*$/, "").replace(/:.+$/, ""); if (!host) throw new Error("FTP_SERVER is empty"); fs.appendFileSync(process.env.GITHUB_OUTPUT, "server="+host+"\\n");'
+          node -e 'const fs=require("node:fs"); const raw=(process.env.FTP_SERVER||"").replaceAll("\\n","").replaceAll("\\r","").trim(); const host=/^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? new URL(raw).hostname : raw.replace(/\/.*$/, "").replace(/:.+$/, ""); if (!host) throw new Error("FTP_SERVER is empty"); fs.appendFileSync(process.env.GITHUB_OUTPUT, "server="+host+"\\n");'
 
       - name: Upload static site through explicit FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0

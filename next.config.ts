@@ -8,6 +8,7 @@ const config: NextConfig = {
   trailingSlash: isStaticExport,
   basePath: isPagesBuild ? "/supreme-colchoes-site" : undefined,
   assetPrefix: isPagesBuild ? "/supreme-colchoes-site/" : undefined,
+  images: { unoptimized: isStaticExport },
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: { cpus: 2 },

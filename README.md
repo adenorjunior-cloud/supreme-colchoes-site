@@ -29,6 +29,16 @@ Para validar canonicals/indexação em ambiente local, execute build/start com `
 
 CI executa lint, testes unitários, build, TypeScript e smoke test HTTP, sem publicar.
 
+## HostGator compartilhada
+
+Para gerar os arquivos estáticos que serão enviados ao `public_html`, execute:
+
+```sh
+npm run build:hostgator
+```
+
+O comando cria a pasta `out/`. Envie o conteúdo dela — e não a pasta em si — para o diretório público do domínio. Essa exportação não inicia servidor Node.js e não deve ser confundida com a prévia do GitHub Pages. Antes de publicar, confirme o domínio HTTPS em `SITE_URL`, reconstrua o projeto e revise visualmente as rotas principais.
+
 ## Prévia no GitHub Pages
 
 O workflow `Publish GitHub Pages preview` publica somente a branch `feat/supreme-site-inicial` em uma prévia temporária. Ele usa exportação estática e não recebe `SITE_URL`, portanto a prévia permanece com `noindex` e não é uma publicação de produção.

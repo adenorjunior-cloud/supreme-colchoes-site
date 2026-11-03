@@ -1,0 +1,32 @@
+.hero {
+  grid-template-columns: 0.82fr 1fr;
+}
+
+.hero-photo {
+  min-height: 500px;
+  overflow: hidden;
+  border-radius: 120px 120px 4px 4px;
+  background: #e9ded0;
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 760px) {
+  .hero-photo {
+    min-height: 360px;
+    border-radius: 92px 92px 4px 4px;
+  }
+
+  .hero-photo img {
+    min-height: 360px;
+    object-position: center center;
+  }
+}
+

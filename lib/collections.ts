@@ -1,17 +1,20 @@
-export type CollectionItem = { name: string; description: string; image: string };
+export type CollectionItem = { name: string; description: string; images: { environment: string; product: string } };
+
+const bed = (slug: string) => ({ environment: `/catalogo/camas/${slug}-ambiente.jpg`, product: `/catalogo/camas/${slug}-produto.jpg` });
+const headboard = (slug: string) => ({ environment: `/catalogo/cabeceiras/${slug}-ambiente.jpg`, product: `/catalogo/cabeceiras/${slug}-produto.jpg` });
 
 export const beds: CollectionItem[] = [
-  { name: "Pier", description: "Design inspirado na leveza de um píer, com cabeceira integrada e visual contemporâneo.", image: "/catalogo/camas/pier-ambiente.jpg" },
-  { name: "Amalfitana", description: "Linhas curvas e acabamento acolhedor para uma composição leve e sofisticada.", image: "/catalogo/camas/amalfitana-ambiente.jpg" },
-  { name: "Utah", description: "Estrutura marcante, combinando madeira e tecido para um ambiente de personalidade.", image: "/catalogo/camas/utah-ambiente.jpg" },
-  { name: "Flora", description: "Visual elegante e leve, pensado para composições contemporâneas e acolhedoras.", image: "/catalogo/camas/flora-ambiente.jpg" },
-  { name: "Monza", description: "Cabeceira estruturada e detalhes que valorizam a presença da cama no ambiente.", image: "/catalogo/camas/monza-ambiente.jpg" },
-  { name: "Roma", description: "Uma proposta clean e atemporal para quartos que pedem simplicidade e elegância.", image: "/catalogo/camas/roma-ambiente.jpg" },
+  { name: "Pier", description: "Design inspirado na leveza de um píer, com cabeceira integrada e visual contemporâneo.", images: bed("pier") },
+  { name: "Amalfitana", description: "Linhas curvas e acabamento acolhedor para uma composição leve e sofisticada.", images: bed("amalfitana") },
+  { name: "Utah", description: "Estrutura marcante, combinando madeira e tecido para um ambiente de personalidade.", images: bed("utah") },
+  { name: "Flora", description: "Visual elegante e leve, pensado para composições contemporâneas e acolhedoras.", images: bed("flora") },
+  { name: "Monza", description: "Cabeceira estruturada e detalhes que valorizam a presença da cama no ambiente.", images: bed("monza") },
+  { name: "Roma", description: "Uma proposta clean e atemporal para quartos que pedem simplicidade e elegância.", images: bed("roma") },
 ];
 
 export const headboards: CollectionItem[] = [
-  "Quebec", "Oslo", "Atlântica", "Istambul", "Mileto", "Montreal", "Line", "Barcelona Classic", "Fiore", "Milão Classic", "Rubi", "Dubai", "Miami", "Mônaco Premium",
-].map((name) => ({ name, description: "Modelo disponível em diferentes cores e tecidos. Consulte medidas e acabamentos.", image: `/catalogo/cabeceiras/${name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replaceAll(" ", "-")}-ambiente.jpg` }));
+  ["Quebec", "quebec"], ["Oslo", "oslo"], ["Atlântica", "atlantica"], ["Istambul", "istambul"], ["Mileto", "mileto"], ["Montreal", "montreal"], ["Line", "line"], ["Barcelona Classic", "barcelona-classic"], ["Fiore", "fiore"], ["Milão Classic", "milao-classic"], ["Rubi", "rubi"], ["Dubai", "dubai"], ["Miami", "miami"], ["Mônaco Premium", "monaco-premium"],
+].map(([name, slug]) => ({ name, description: "Modelo disponível em diferentes cores e tecidos. Consulte medidas e acabamentos.", images: headboard(slug) }));
 
 export const guideArticles = [
   ["como-escolher-o-colchao-ideal", "Como escolher o colchão ideal: guia completo para comprar sem errar", "Guia de compra", "Organize a compra do colchão: medidas, necessidades de quem vai usar, teste na loja e informações que precisam estar claras antes da decisão."],

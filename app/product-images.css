@@ -1,0 +1,31 @@
+/* Softer editorial product photography, without abrupt image-to-background edges. */
+.product-art {
+  min-height: 240px;
+  background: #f5f0e9;
+  isolation: isolate;
+  overflow: hidden;
+}
+.product-art::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 32%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(245,240,233,0), rgba(245,240,233,.62));
+}
+.product-art .product-image {
+  object-fit: contain;
+  object-position: center;
+  padding: 14px;
+  border-radius: 0;
+  mix-blend-mode: normal;
+}
+.product-art > span { z-index: 2; }
+.product-content { padding-top: 22px; }
+.product-content h3 { margin-top: 0; }
+@media (max-width: 760px) {
+  .product-art { min-height: 175px; }
+  .product-art .product-image { padding: 9px; }
+  .product-content { padding-top: 18px; }
+}

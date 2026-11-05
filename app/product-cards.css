@@ -28,4 +28,7 @@
     padding: 16px;
   }
 }
-\n.product-card .product-art .product-image {\n  border-radius: 14px;\n}\n
+
+.product-card .product-art .product-image {
+  border-radius: 14px;
+}

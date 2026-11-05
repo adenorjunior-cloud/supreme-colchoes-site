@@ -14,7 +14,7 @@ const mobileLinks = [
   { href: "/marcas", label: "Marcas" },
   { href: "/ofertas", label: "Ofertas", featured: true },
   { href: "/guia", label: "Guia" },
-  { href: "/#lojas", label: "Lojas" },
+  { href: "/lojas/", label: "Lojas" },
 ];
 
 export default function Header() {
@@ -59,7 +59,7 @@ export default function Header() {
         <Link href="/cabeceiras">Cabeceiras</Link>
         <Link href="/marcas">Marcas</Link>
         <Link href="/guia">Guia</Link>
-        <Link href="/#lojas">Lojas</Link>
+        <Link href="/lojas/">Lojas</Link>
         <Link className="nav-contact" href="/#atendimento">Vamos conversar ↗</Link>
       </nav>
 

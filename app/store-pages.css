@@ -1,0 +1,33 @@
+.locations { padding-top: 64px; }
+.location-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.location-card,
+.store-location-card { border: 1px solid var(--line); background: #fffdf9; padding: 32px; }
+.location-card h3,
+.store-location-card h3 { margin: 18px 0; }
+.location-card address,
+.store-location-card address { font-style: normal; color: var(--muted); }
+.location-reference { margin-top: 10px; font-size: 13px; }
+.location-details { margin: 26px 0; border-top: 1px solid var(--line); }
+.location-details div { display: grid; grid-template-columns: minmax(88px, .45fr) 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.location-details dt { font-weight: 600; }
+.location-details dd { margin: 0; color: var(--muted); }
+.location-details a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.location-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.location-link { margin-top: 12px; }
+.store-hero .location-breadcrumb { display: flex; width: fit-content; gap: 8px; margin-bottom: 28px; padding-bottom: 6px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.location-breadcrumb a { color: inherit; }
+.store-location { display: grid; grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr); align-items: start; gap: clamp(36px, 7vw, 110px); }
+.store-location-copy h2 { margin: 20px 0; }
+.store-location-copy > p:not(.eyebrow) + p { margin-top: 16px; }
+
+@media (max-width: 760px) {
+  .locations { padding-top: 42px; }
+  .location-grid,
+  .store-location { grid-template-columns: 1fr; }
+  .location-card,
+  .store-location-card { padding: 24px; }
+  .location-details div { grid-template-columns: 1fr; gap: 4px; }
+  .location-actions .button { width: 100%; }
+  .location-actions .text-link { width: 100%; }
+  .store-hero .location-breadcrumb { margin-bottom: 22px; }
+}

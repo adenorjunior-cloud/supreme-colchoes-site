@@ -2,9 +2,26 @@
 // Supreme-specific records marked owner-confirmed on 2026-10-18. See docs/REFERENCIAS.md.
 const supremeConfirmedAt = "2026-10-18";
 const supremeConfirmationSource = "Dados comerciais confirmados pelo proprietário em 18/10/2026";
-export const stores = [
+
+export type Store = {
+  slug: "brotas" | "itaigara";
+  name: string;
+  neighborhood: string;
+  address: string;
+  reference: string;
+  phone: string;
+  whatsapp: string;
+  hours: string;
+  mapsUrl: string;
+  confirmedAt: string;
+  confirmationSource: string;
+};
+
+export const stores: Store[] = [
   {
+    slug: "brotas",
     name: "Supreme Colchões Brotas",
+    neighborhood: "Brotas",
     address: "Av. Dom João VI, 487, Brotas, Salvador/BA, 40285-001",
     reference: "Próximo à sinaleira da Cruz da Redenção.",
     phone: "(71) 98135-4567",
@@ -15,7 +32,9 @@ export const stores = [
     confirmationSource: supremeConfirmationSource,
   },
   {
+    slug: "itaigara",
     name: "Supreme Colchões Shopping Itaigara",
+    neighborhood: "Itaigara",
     address: "Av. Antônio Carlos Magalhães, Shopping Itaigara, Loja 03, térreo, Salvador/BA, 41825-000",
     reference: "Entrada principal do Shopping Itaigara.",
     phone: "(71) 3019-9697",
@@ -26,3 +45,7 @@ export const stores = [
     confirmationSource: supremeConfirmationSource,
   },
 ];
+
+export function getStore(slug: string) {
+  return stores.find((store) => store.slug === slug);
+}

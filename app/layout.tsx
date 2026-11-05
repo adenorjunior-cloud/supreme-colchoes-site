@@ -7,6 +7,7 @@ import "./product-images.css";
 import "./product-cards.css";
 import "./brand-cards.css";
 import "./home-spacing.css";
+import "./store-pages.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";

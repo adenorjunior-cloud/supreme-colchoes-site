@@ -1,0 +1,23 @@
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.brand-logo {
+  display: block;
+  width: 156px;
+  height: auto;
+}
+
+footer .brand-logo {
+  width: 150px;
+}
+
+@media (max-width: 760px) {
+  .brand-logo,
+  footer .brand-logo {
+    width: 126px;
+  }
+}
+

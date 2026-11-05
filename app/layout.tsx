@@ -4,6 +4,7 @@ import "./hero.css";
 import "./brand-logo.css";
 import "./product-typography.css";
 import "./product-images.css";
+import "./product-cards.css";
 import "./brand-cards.css";
 import "./home-spacing.css";
 import Header from "@/components/Header";

@@ -1,0 +1,30 @@
+.product-card {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--line) 72%, transparent);
+  border-radius: 18px;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.product-card:hover {
+  border-color: #c9ad90;
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+.product-card .product-art {
+  border-radius: 18px 18px 0 0;
+}
+
+.product-card .product-art > span {
+  border-radius: 999px;
+}
+
+.product-card .product-content {
+  padding: 22px;
+}
+
+@media (max-width: 760px) {
+  .product-card .product-content {
+    padding: 16px;
+  }
+}

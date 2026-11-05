@@ -1,0 +1,33 @@
+/* Supreme product cards: consistent lettering, numerals and vertical rhythm. */
+.product-card { display: flex; flex-direction: column; }
+.product-content { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+.product-content h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.12rem, 1.45vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.product-content > p:not(.eyebrow) {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.product-bottom { margin-top: auto; }
+.product-bottom strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: -.015em;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+.product-bottom a { width: fit-content; }
+@media (max-width: 760px) {
+  .product-content h3 { font-size: 1.05rem; line-height: 1.3; }
+  .product-bottom strong { font-size: 15px; }
+}

@@ -14,6 +14,7 @@ const url = getSiteUrl();
 export const metadata: Metadata = {
   title: { default: "Supreme Colchões | Conforto e design em Salvador", template: "%s | Supreme Colchões" },
   description: site.description,
+  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], shortcut: "/favicon.svg" },
   ...(url ? { metadataBase: new URL(url), alternates: { canonical: "/" } } : {}),
   robots: { index: Boolean(url), follow: Boolean(url) },
   openGraph: { type: "website", locale: "pt_BR", siteName: site.name, title: site.name, description: site.description, ...(url ? { url } : {}) },

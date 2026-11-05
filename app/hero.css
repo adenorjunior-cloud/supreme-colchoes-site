@@ -1,32 +1,44 @@
+/* Editorial hero: copy stays fixed while photography rotates. */
 .hero {
-  grid-template-columns: 0.82fr 1fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  padding-top: 28px;
 }
-
-.hero-photo {
-  min-height: 500px;
-  overflow: hidden;
-  border-radius: 120px 120px 4px 4px;
-  background: #e9ded0;
-}
-
-.hero-photo img {
-  display: block;
+.hero-copy { padding: 18px 0 24px; min-width: 0; }
+.hero h1 { font-size: clamp(2.8rem, 4.4vw, 4.8rem); }
+.hero-carousel {
+  position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 500px;
-  object-fit: cover;
-  object-position: center;
+  height: clamp(330px, 37vw, 500px);
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 100px 100px 4px 4px;
+  background: #e9ded0;
+  isolation: isolate;
 }
-
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; pointer-events: none; }
+.hero-slide.is-active { opacity: 1; z-index: 1; }
+.hero-slide img { object-fit: cover; object-position: center; }
+.hero-carousel-controls {
+  position: absolute; bottom: 16px; right: 16px; z-index: 2;
+  display: flex; align-items: center; gap: 12px;
+  padding: 5px 8px; background: rgba(252,248,242,.93);
+  color: #703015; border-radius: 4px;
+}
+.hero-carousel-controls button {
+  background: transparent; color: inherit; border: 0;
+  cursor: pointer; min-width: 38px; min-height: 38px;
+  font-size: 25px; line-height: 1;
+}
+.hero-carousel-controls button:focus-visible { outline: 2px solid #703015; outline-offset: 1px; }
+.hero-carousel-count { font-size: 11px; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
 @media (max-width: 760px) {
-  .hero-photo {
-    min-height: 360px;
-    border-radius: 92px 92px 4px 4px;
-  }
-
-  .hero-photo img {
-    min-height: 360px;
-    object-position: center center;
-  }
+  .hero { grid-template-columns: 1fr; gap: 18px; padding-top: 22px; }
+  .hero-copy { padding: 8px 0; }
+  .hero h1 { font-size: clamp(2.7rem, 10vw, 3.8rem); }
+  .hero-carousel { height: clamp(280px, 78vw, 390px); border-radius: 70px 70px 4px 4px; }
 }
-
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: none; }
+}

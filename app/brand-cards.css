@@ -1,0 +1,22 @@
+/* Brand cards echo the soft arch of the homepage hero. */
+.brands article {
+  border: 1px solid var(--line);
+  border-radius: 68px 68px 14px 14px;
+  background: linear-gradient(155deg, #f7efe4 0%, #fffdf9 65%);
+  padding: 42px 24px 30px;
+  min-height: 245px;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.brands article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(112,48,21,.09);
+}
+.brands article h2 { font-size: clamp(1.8rem, 2.3vw, 2.35rem); letter-spacing: -.035em; }
+.brands article .text-link { margin-top: 20px; }
+@media (max-width: 760px) {
+  .brands article { border-radius: 54px 54px 12px 12px; min-height: 205px; padding: 34px 26px 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brands article { transition: none; }
+}
